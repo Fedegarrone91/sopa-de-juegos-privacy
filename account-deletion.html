@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eliminación de cuenta — Sopa de Juegos</title>
+  <style>
+    :root {
+      --bg:        #0C111C;
+      --surface:   #1A2235;
+      --surface2:  #222D42;
+      --cyan:      #7FB8C9;
+      --violet:    #8B84D7;
+      --gold:      #D6B25E;
+      --red:       #E53935;
+      --red-soft:  #2A1212;
+      --text:      #EEF2FF;
+      --muted:     #8A9BB0;
+      --border:    #2D3A52;
+      --radius:    12px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .logo-badge {
+      width: 48px; height: 48px;
+      background: var(--surface2);
+      border: 2px solid var(--cyan);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text strong { font-size: 18px; color: var(--text); }
+    .logo-text span { font-size: 12px; color: var(--muted); }
+
+    /* ── Layout ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Intro ── */
+    .page-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .page-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px 28px 24px;
+      margin-bottom: 20px;
+    }
+    .card-danger {
+      background: var(--red-soft);
+      border-color: rgba(229, 57, 53, 0.35);
+    }
+    .card h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-danger h2 { color: var(--red); }
+    .card p, .card li { font-size: 14px; color: var(--muted); }
+    .card ul { padding-left: 20px; margin-top: 8px; }
+    .card ul li { margin-bottom: 5px; }
+
+    /* ── Steps ── */
+    .steps { display: flex; flex-direction: column; gap: 14px; margin-top: 6px; }
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .step-num {
+      min-width: 28px; height: 28px;
+      background: var(--cyan);
+      color: var(--bg);
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-text { font-size: 14px; color: var(--muted); }
+    .step-text strong { color: var(--text); }
+
+    /* ── Path highlight ── */
+    .path {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-family: monospace;
+      font-size: 13px;
+      color: var(--cyan);
+      margin: 2px 0;
+    }
+
+    /* ── Warning box ── */
+    .warning-box {
+      background: rgba(229, 57, 53, 0.12);
+      border-left: 4px solid var(--red);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 16px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: #E57373;
+    }
+    .warning-box strong { color: var(--red); }
+
+    /* ── Data list chips ── */
+    .data-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .chip {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-badge">🎮</div>
+    <div class="logo-text">
+      <strong>Sopa de Juegos</strong>
+      <span>by Sopa Games</span>
+    </div>
+  </header>
+
+  <main>
+
+    <h1 class="page-title">Eliminación de cuenta</h1>
+    <p class="page-subtitle">
+      Cómo eliminar permanentemente tu cuenta y todos tus datos de Sopa de Juegos.
+    </p>
+
+    <!-- Cómo eliminar -->
+    <div class="card">
+      <h2>📱 Cómo eliminar tu cuenta</h2>
+      <p>Podés eliminar tu cuenta directamente desde la aplicación, sin necesidad de enviar correos ni contactar soporte.</p>
+
+      <div class="steps" style="margin-top: 18px;">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            Abrí la aplicación <strong>Sopa de Juegos</strong> en tu dispositivo Android.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            Tocá el ícono de <strong>Configuración</strong> (⚙️) desde la pantalla principal.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            Desplazate hasta la sección <span class="path">Cuenta</span>.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            Tocá <span class="path" style="color: #E53935; border-color: rgba(229,57,53,.4);">Eliminar cuenta</span>.
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-text">
+            Revisá el resumen de qué datos se eliminarán y confirmá tocando <strong>"Eliminar cuenta"</strong> en el diálogo.
+          </div>
+        </div>
+      </div>
+
+      <div class="warning-box">
+        <strong>⚠️ Esta acción no puede deshacerse.</strong>
+        Una vez confirmada, tu cuenta y todos los datos asociados serán eliminados de forma permanente.
+      </div>
+    </div>
+
+    <!-- Qué se elimina -->
+    <div class="card">
+      <h2>🗑️ Qué datos se eliminan</h2>
+      <p>Al eliminar tu cuenta se eliminan de forma permanente todos los datos asociados a tu usuario, incluyendo:</p>
+
+      <div class="data-chips">
+        <span class="chip">Progreso de todos los juegos</span>
+        <span class="chip">XP y nivel</span>
+        <span class="chip">Monedas</span>
+        <span class="chip">Estadísticas</span>
+        <span class="chip">Rachas</span>
+        <span class="chip">Logros</span>
+        <span class="chip">Información del perfil</span>
+        <span class="chip">Posición en rankings</span>
+        <span class="chip">Datos de sesión local</span>
+        <span class="chip">Cualquier otro dato asociado a tu usuario</span>
+      </div>
+    </div>
+
+    <!-- Dónde se almacenan -->
+    <div class="card">
+      <h2>☁️ Dónde se almacenan tus datos</h2>
+      <ul>
+        <li><strong>Firebase Authentication</strong> — credenciales de acceso anónimo</li>
+        <li><strong>Firebase Firestore</strong> — progreso, rankings y estadísticas en la nube</li>
+        <li><strong>Almacenamiento local</strong> — preferencias y caché en el dispositivo</li>
+      </ul>
+      <p style="margin-top: 12px;">
+        Al confirmar la eliminación, los datos se borran de todos estos sistemas de forma automática.
+      </p>
+    </div>
+
+    <!-- Advertencia destructiva -->
+    <div class="card card-danger">
+      <h2>🔴 Acción permanente e irreversible</h2>
+      <p>
+        La eliminación de cuenta es definitiva. No existe forma de recuperar los datos
+        una vez confirmada la acción. Si solo querés pausar el uso de la app,
+        podés simplemente desinstalarla sin eliminar tu cuenta.
+      </p>
+    </div>
+
+    <!-- Soporte -->
+    <div class="card">
+      <h2>💬 ¿Necesitás ayuda?</h2>
+      <p>
+        Si tenés algún inconveniente para eliminar tu cuenta desde la app, contactanos en
+        <a href="mailto:soporte@sopadejuegos.app" style="color: var(--cyan);">soporte@sopadejuegos.app</a>
+        y lo resolveremos a la brevedad.
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>
+      © 2024 Sopa Games · 
+      <a href="https://fedegarrone91.github.io/sopa-de-juegos-privacy/">Política de Privacidad</a>
+    </p>
+  </footer>
+
+</body>
+</html>
